@@ -1,0 +1,5 @@
+D:\Documents\Cources\Lesson_04\02_Insertion sort\02_Insertion sort\bin\Debug\02_Insertion sort.exe
+D:\Documents\Cources\Lesson_04\02_Insertion sort\02_Insertion sort\bin\Debug\02_Insertion sort.pdb
+D:\Documents\Cources\Lesson_04\02_Insertion sort\02_Insertion sort\obj\Debug\02_Insertion sort.csprojResolveAssemblyReference.cache
+D:\Documents\Cources\Lesson_04\02_Insertion sort\02_Insertion sort\obj\Debug\02_Insertion sort.exe
+D:\Documents\Cources\Lesson_04\02_Insertion sort\02_Insertion sort\obj\Debug\02_Insertion sort.pdb

@@ -1,0 +1,4 @@
+D:\Documents\Cources\Lesson_04\03_CircularQueue\03_CircularQueue\bin\Debug\03_CircularQueue.exe
+D:\Documents\Cources\Lesson_04\03_CircularQueue\03_CircularQueue\bin\Debug\03_CircularQueue.pdb
+D:\Documents\Cources\Lesson_04\03_CircularQueue\03_CircularQueue\obj\Debug\03_CircularQueue.exe
+D:\Documents\Cources\Lesson_04\03_CircularQueue\03_CircularQueue\obj\Debug\03_CircularQueue.pdb

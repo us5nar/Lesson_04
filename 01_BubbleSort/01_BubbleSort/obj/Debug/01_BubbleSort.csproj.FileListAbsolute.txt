@@ -1,0 +1,5 @@
+D:\Documents\Cources\Lesson_04\01_BubbleSort\01_BubbleSort\bin\Debug\01_BubbleSort.exe
+D:\Documents\Cources\Lesson_04\01_BubbleSort\01_BubbleSort\bin\Debug\01_BubbleSort.pdb
+D:\Documents\Cources\Lesson_04\01_BubbleSort\01_BubbleSort\obj\Debug\01_BubbleSort.csprojResolveAssemblyReference.cache
+D:\Documents\Cources\Lesson_04\01_BubbleSort\01_BubbleSort\obj\Debug\01_BubbleSort.exe
+D:\Documents\Cources\Lesson_04\01_BubbleSort\01_BubbleSort\obj\Debug\01_BubbleSort.pdb
