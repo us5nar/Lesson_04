@@ -68,6 +68,37 @@ namespace _03_CircularQueue
                         
             return qIsFull;
         }
+
+        //-------------------------------------------------------------------------------------------------
+        public bool Enqueue(object obj)
+        {
+            if ((nRearPosition == (nMaxSize - 1) && nFrontPosition == 0) || ((nRearPosition != -1) && (nRearPosition + 1) == nFrontPosition))
+                return false;
+            if (nRearPosition == (nMaxSize - 1) && nFrontPosition > 0)
+                nRearPosition = -1;
+            nRearPosition += 1;
+            alstQueueContent[nRearPosition] = obj;
+            if ((nRearPosition - 1) == nFrontPosition &&
+                       alstQueueContent[nFrontPosition] == null)
+                nFrontPosition = nFrontPosition + 1;
+            return true;
+        }
+        public object Dequeue()
+        {
+            object Output = "Empty";
+            if (alstQueueContent[nFrontPosition] != null)
+            {
+                Output = alstQueueContent[nFrontPosition];
+                alstQueueContent[nFrontPosition] = null;
+                if ((nFrontPosition + 1) < nMaxSize &&
+                        alstQueueContent[nFrontPosition + 1] != null)
+                    nFrontPosition += 1;
+                else if (alstQueueContent[0] != null && (nFrontPosition + 1) == nMaxSize)
+                    nFrontPosition = 0;
+            }
+            return Output;
+        }
+        //-------------------------------------------------------------------------------------------------
         //static void enqueue(int newElement)
         //{
         //    if ((qTail == qHead) && (qTail == 0) && (qLenth == 0))
