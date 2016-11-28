@@ -14,8 +14,13 @@ namespace _03_CircularQueue
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Clear();
             //Initialization
+            qMaxLength = qBuffer.Length;
+            qHead = 0;
+            qTail = 0;
+            qLength = 0;
+
             Random inputValue = new Random();
-            
+
             //Fill the queue
             while (!Enqueue(inputValue.Next(0, 999)))
             { print(); }
@@ -28,7 +33,7 @@ namespace _03_CircularQueue
             }
 
 
-      
+
             //Fill the queue again
             while (!Enqueue(inputValue.Next(0, 999)))
             { print(); }
@@ -51,23 +56,94 @@ namespace _03_CircularQueue
 
 
 
-        } // End of Program
+        } //--------------------------------------- End of Program----------------------------------------------
+//        Указатели хвоста и головы могут принимать любые значения от 0 до SIZE_BUF - 1. 
+//Для работы с буфером требуется как минимум три функции – очистить буфер, положить символ, взять символ.
 
+////"очищает" буфер
+//void FlushBuf(void)
+//        {
+//            tail = 0;
+//            head = 0;
+//            count = 0;
+//        }
+//        Как вы видите, массив cycleBuf[] не очищается.Функция обнуляет "указатели" хвоста, головы и счетчик символов, но это равносильно тому, что в буфере нет данных.
+//     //положить символ в буфер
+//     void PutChar(unsigned char sym)
+//        {
+//            if (count < SIZE_BUF)
+//            {   //если в буфере еще есть место
+//                cycleBuf[tail] = sym;    //помещаем в него символ
+//                count++;                    //инкрементируем счетчик символов
+//                tail++;                           //и индекс хвоста буфера
+//                if (txBufTail == SIZE_BUF) txBufTail = 0;
+//            }
+//        }
+
+//        //взять символ из буфера
+//        unsigned char GetChar(void)
+//        {
+//            unsigned char sym = 0;
+//            if (count > 0)
+//            {                            //если буфер не пустой
+//                sym = cycleBuf[head];              //считываем символ из буфера
+//                count--;                                   //уменьшаем счетчик символов
+//                head++;                                  //инкрементируем индекс головы буфера
+//                if (head == SIZE_BUF) head = 0;
+//            }
+//            return sym;
+//        }
         //enqueue - adding new element
         //dequeue - extracting eldest element
         //print   - visualizing content of internal array
 
-        static int[] intQueue = new int[8];    // A body of the queue
-        static int qHead, qTail;//, qLenth;       // indexses
-        static bool Enqueue(int newElement)    // New enqueue method - returns true if success
+        static int[] qBuffer = new int[8];    // A body of the queue
+        static int qHead, qTail, qLength, qMaxLength;   // indexses
+        static bool qIsFull, qIsEmpty;
+        static bool Enqueue(int newElement)           // New enqueue method - returns true if full
         {
-            bool qIsFull = ((qTail == 0) && (qHead == intQueue.Length) || (qTail != 0) && qHead==qTail);
-            if (qIsFull) { return qIsFull;}
-            else if (qHead == intQueue.Length) { qHead = 0; intQueue[qHead] = newElement; qHead++; }
-            else {intQueue[qHead] = newElement; qHead++;}
-                        
+            if (qLength < qMaxLength)
+            {
+                qBuffer[qTail] = newElement;
+                qLength++;
+                qTail++;
+                qIsFull = false;
+
+                if (qTail == qMaxLength) { qTail = 0; qIsFull = true; }
+            }
             return qIsFull;
         }
+
+        //-------------------------------------------------------------------------------------------------
+        //public bool Enqueue(object obj)
+        //{
+        //    if ((qTail == (nMaxSize - 1) && qHead == 0) || ((qTail != -1) && (qTail + 1) == qHead))
+        //        return false;
+        //    if (qTail == (nMaxSize - 1) && qHead > 0)
+        //        qTail = -1;
+        //    qTail += 1;
+        //    intQueue[qTail] = obj;
+        //    if ((qTail - 1) == qHead &&
+        //               intQueue[qHead] == null)
+        //        qHead = qHead + 1;
+        //    return true;
+        //}
+        //public object Dequeue()
+        //{
+        //    object Output = "Empty";
+        //    if (intQueue[qHead] != null)
+        //    {
+        //        Output = intQueue[qHead];
+        //        intQueue[qHead] = null;
+        //        if ((qHead + 1) < nMaxSize &&
+        //                intQueue[qHead + 1] != null)
+        //            qHead += 1;
+        //        else if (intQueue[0] != null && (qHead + 1) == nMaxSize)
+        //            qHead = 0;
+        //    }
+        //    return Output;
+        //}
+        //-------------------------------------------------------------------------------------------------
         //static void enqueue(int newElement)
         //{
         //    if ((qTail == qHead) && (qTail == 0) && (qLenth == 0))
@@ -97,14 +173,14 @@ namespace _03_CircularQueue
         static int dequeue()
         {
             int r;
-            if ((qTail == qHead && qHead==0)||(qTail==(qHead-1)))
+            if ((qTail == qHead && qHead == 0) || (qTail == (qHead - 1)))
             {
                 Console.WriteLine("Queue is empty!!!");
                 return -1;
             }
-            else if (qTail == intQueue.Length -1)
+            else if (qTail == qBuffer.Length - 1)
             {
-                r = intQueue[qTail];
+                r = qBuffer[qTail];
                 //intQueue[qTail] = -1;
                 qTail = 0;
                 //qLenth--;
@@ -112,7 +188,7 @@ namespace _03_CircularQueue
             }
             else
             {
-                r = intQueue[qTail];
+                r = qBuffer[qTail];
                 //intQueue[qTail] = -1;
                 qTail++;
                 //qLenth--;
@@ -122,7 +198,7 @@ namespace _03_CircularQueue
         }
         static void print()
         {
-            for (int i = 0; i < intQueue.Length; i++)
+            for (int i = 0; i < qBuffer.Length; i++)
             {
                 if (qHead > qTail && (i < qTail || i > qHead - 1))
                 {
@@ -138,7 +214,7 @@ namespace _03_CircularQueue
                 //}
                 else
                 {
-                    Console.Write("{0,5}|", intQueue[i]);
+                    Console.Write("{0,5}|", qBuffer[i]);
                 }
 
             }
