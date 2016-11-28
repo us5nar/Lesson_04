@@ -115,6 +115,7 @@ namespace _03_CircularQueue
         }
 
         //-------------------------------------------------------------------------------------------------
+<<<<<<< HEAD
         //public bool Enqueue(object obj)
         //{
         //    if ((qTail == (nMaxSize - 1) && qHead == 0) || ((qTail != -1) && (qTail + 1) == qHead))
@@ -143,6 +144,36 @@ namespace _03_CircularQueue
         //    }
         //    return Output;
         //}
+=======
+        public bool Enqueue(object obj)
+        {
+            if ((nRearPosition == (nMaxSize - 1) && nFrontPosition == 0) || ((nRearPosition != -1) && (nRearPosition + 1) == nFrontPosition))
+                return false;
+            if (nRearPosition == (nMaxSize - 1) && nFrontPosition > 0)
+                nRearPosition = -1;
+            nRearPosition += 1;
+            alstQueueContent[nRearPosition] = obj;
+            if ((nRearPosition - 1) == nFrontPosition &&
+                       alstQueueContent[nFrontPosition] == null)
+                nFrontPosition = nFrontPosition + 1;
+            return true;
+        }
+        public object Dequeue()
+        {
+            object Output = "Empty";
+            if (alstQueueContent[nFrontPosition] != null)
+            {
+                Output = alstQueueContent[nFrontPosition];
+                alstQueueContent[nFrontPosition] = null;
+                if ((nFrontPosition + 1) < nMaxSize &&
+                        alstQueueContent[nFrontPosition + 1] != null)
+                    nFrontPosition += 1;
+                else if (alstQueueContent[0] != null && (nFrontPosition + 1) == nMaxSize)
+                    nFrontPosition = 0;
+            }
+            return Output;
+        }
+>>>>>>> 651ac0d154c5f6edbcad5a5a4aecb9be5528ef01
         //-------------------------------------------------------------------------------------------------
         //static void enqueue(int newElement)
         //{
