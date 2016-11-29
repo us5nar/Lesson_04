@@ -15,9 +15,9 @@ namespace _03_CircularQueue
             Console.Clear();
             //Initialization
             qMaxLength = qBuffer.Length;
-            qHead = 0;
-            qTail = 0;
-            qLength = 0;
+            qHead = 2;
+            qTail = 7;
+            qLength = 7;
 
             Random inputValue = new Random();
 
@@ -100,6 +100,31 @@ namespace _03_CircularQueue
         static int[] qBuffer = new int[8];    // A body of the queue
         static int qHead, qTail, qLength, qMaxLength;   // indexses
         static bool qIsFull, qIsEmpty;
+        static void print()
+        {
+            for (int i = 0; i < qBuffer.Length; i++)
+            {
+                //if (qHead > qTail && (i < qTail || i > qHead - 1))
+                //{
+                //    Console.Write(" FREE|");
+                //}
+                //else if (qHead < qTail && !(i > qTail - 1 || i < qHead))
+                //{
+                //    Console.Write(" FREE|");
+                //}
+                ////else if (qHead == qTail)
+                ////{
+                ////    Console.Write(" FREE|");
+                ////}
+                //else
+                //{
+                Console.Write("{0,5}|", qBuffer[i]);
+                //}
+
+            }
+            Console.Write(">H={0,2} >T={1,2} >L={2,2} \n", qHead, qTail, qLength);
+        }
+
         static bool Enqueue(int newElement)           // New enqueue method - returns true if full
         {
             if (qLength < qMaxLength)
@@ -108,14 +133,14 @@ namespace _03_CircularQueue
                 qLength++;
                 qTail++;
                 qIsFull = false;
-
-                if (qTail == qMaxLength) { qTail = 0; qIsFull = true; }
             }
+            else if (qTail == qMaxLength) { qTail = 0; qIsFull = true; }
+            else qIsFull = true;
             return qIsFull;
         }
 
         //-------------------------------------------------------------------------------------------------
-<<<<<<< HEAD
+///<<<<<<< HEAD
         //public bool Enqueue(object obj)
         //{
         //    if ((qTail == (nMaxSize - 1) && qHead == 0) || ((qTail != -1) && (qTail + 1) == qHead))
@@ -144,36 +169,36 @@ namespace _03_CircularQueue
         //    }
         //    return Output;
         //}
-=======
-        public bool Enqueue(object obj)
-        {
-            if ((nRearPosition == (nMaxSize - 1) && nFrontPosition == 0) || ((nRearPosition != -1) && (nRearPosition + 1) == nFrontPosition))
-                return false;
-            if (nRearPosition == (nMaxSize - 1) && nFrontPosition > 0)
-                nRearPosition = -1;
-            nRearPosition += 1;
-            alstQueueContent[nRearPosition] = obj;
-            if ((nRearPosition - 1) == nFrontPosition &&
-                       alstQueueContent[nFrontPosition] == null)
-                nFrontPosition = nFrontPosition + 1;
-            return true;
-        }
-        public object Dequeue()
-        {
-            object Output = "Empty";
-            if (alstQueueContent[nFrontPosition] != null)
-            {
-                Output = alstQueueContent[nFrontPosition];
-                alstQueueContent[nFrontPosition] = null;
-                if ((nFrontPosition + 1) < nMaxSize &&
-                        alstQueueContent[nFrontPosition + 1] != null)
-                    nFrontPosition += 1;
-                else if (alstQueueContent[0] != null && (nFrontPosition + 1) == nMaxSize)
-                    nFrontPosition = 0;
-            }
-            return Output;
-        }
->>>>>>> 651ac0d154c5f6edbcad5a5a4aecb9be5528ef01
+/////=======
+//        public bool Enqueue(object obj)
+//        {
+//            if ((nRearPosition == (nMaxSize - 1) && nFrontPosition == 0) || ((nRearPosition != -1) && (nRearPosition + 1) == nFrontPosition))
+//                return false;
+//            if (nRearPosition == (nMaxSize - 1) && nFrontPosition > 0)
+//                nRearPosition = -1;
+//            nRearPosition += 1;
+//            alstQueueContent[nRearPosition] = obj;
+//            if ((nRearPosition - 1) == nFrontPosition &&
+//                       alstQueueContent[nFrontPosition] == null)
+//                nFrontPosition = nFrontPosition + 1;
+//            return true;
+//        }
+//        public object Dequeue()
+//        {
+//            object Output = "Empty";
+//            if (alstQueueContent[nFrontPosition] != null)
+//            {
+//                Output = alstQueueContent[nFrontPosition];
+//                alstQueueContent[nFrontPosition] = null;
+//                if ((nFrontPosition + 1) < nMaxSize &&
+//                        alstQueueContent[nFrontPosition + 1] != null)
+//                    nFrontPosition += 1;
+//                else if (alstQueueContent[0] != null && (nFrontPosition + 1) == nMaxSize)
+//                    nFrontPosition = 0;
+//            }
+//            return Output;
+//        }
+////>>>>>>> 651ac0d154c5f6edbcad5a5a4aecb9be5528ef01
         //-------------------------------------------------------------------------------------------------
         //static void enqueue(int newElement)
         //{
@@ -226,30 +251,6 @@ namespace _03_CircularQueue
                 return r;
             }
 
-        }
-        static void print()
-        {
-            for (int i = 0; i < qBuffer.Length; i++)
-            {
-                if (qHead > qTail && (i < qTail || i > qHead - 1))
-                {
-                    Console.Write(" FREE|");
-                }
-                else if (qHead < qTail && !(i > qTail - 1 || i < qHead))
-                {
-                    Console.Write(" FREE|");
-                }
-                //else if (qHead == qTail)
-                //{
-                //    Console.Write(" FREE|");
-                //}
-                else
-                {
-                    Console.Write("{0,5}|", qBuffer[i]);
-                }
-
-            }
-            Console.Write(">H={0,2}>T={1,2} \n", qHead, qTail);//, qLenth);
         }
 
 
